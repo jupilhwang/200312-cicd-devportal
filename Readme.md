@@ -74,6 +74,8 @@ helm install --name gogs --namespace gitserver incubator/gogs \
 
 #### Jenkins 
 
+admin / achc1aQVaZ
+
 ###### add bitnami helm repo
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
@@ -131,3 +133,74 @@ helm install --name kubeapps --namespace kubeapps bitnami/kubeapps \
 ![](img/nexus-helm-values.png)
 
 * 설치 후 nexus.apps.run.haas-205.pez.pivotal.io 에서 이미지가 제대로 보이지 않는 문제가 있어서, Ingress 에서 path /*를 삭제 후 정상 기동
+
+
+
+
+#### kubesphere
+- Installing kubsphere 
+```bash
+kubectl apply -f https://raw.githubusercontent.com/kubesphere/ks-installer/master/kubesphere-complete-setup.yaml
+```
+
+- Verify the access
+```bash
+kubectl logs -n kubesphere-system $(kubectl get pod -n kubesphere-system -l app=ks-install -o jsonpath='{.items[0].metadata.name}') -f
+```
+
+![](img/kubesphere.png)
+
+  - username : admin
+  - password : P@88w0rd --> VMware1!
+
+- Access the kubesphere with browser
+
+- Ingress for kubersphere
+
+```bash
+kubectl apply -f -<<-EOF
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kubesphere-ingress
+  namespace: kubesphere-system
+spec:
+  rules:
+  - host: kubesphere.apps.run.haas-205.pez.pivotal.io
+    http: 
+      paths:
+      - backend:
+          serviceName: ks-console
+          servicePort: 80
+EOF
+```
+
+
+
+#### Contour
+Ingress Controller based on envoy
+
+- Installing Contour
+```baah
+kubectl apply -f https://j.hept.io/contoure-deployment-rbac
+```
+
+#### MetalLB
+provides a network load-balancer implementation for kubernetes clusters
+Layer2 configuration mode of MetalLB
+
+- Installing MetalLB
+```bash
+kubectl apply -f https://raw.githubusercontent.com/google/metallb/v0.8.3/manifests/metallb.yaml
+```
+
+- Components of MetalLB
+  - metallb-system/controller
+  - metallb-system/speaker
+
+- Congiguration
+  - Layer2 Configuration
+  - BGP Configuration
+  - Advertisement Configuration
+
+
