@@ -25,6 +25,14 @@ kubectl patch storageclass thick -p '{"metadata": {"annotations":{"storageclass.
 ```
 
 #### Helm
+
+##### Download CLI version 2
+아직 version3 은 호환성면에서 모든 chart를 제공하지 않기 때문에, version 2 사용
+
+```bash
+wget https://get.helm.sh/helm-v2.16.4-linux-amd64.tar.gz
+```
+
 ##### Helm Tiller
 ``` bash
 kubectl apply -f -<<-EOF
