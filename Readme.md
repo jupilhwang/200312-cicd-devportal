@@ -23,6 +23,7 @@ kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":
 
 kubectl patch storageclass thick -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
+![](img/default-storage-class.png)
 
 #### Helm
 
@@ -57,6 +58,11 @@ subjects:
 EOF
 ```
 
+##### Helm init
+```
+helm init --service-account=tiller
+```
+![](img/helm-init.png)
 ##### Helm Repo Add (Stable, Incubator)
 
 ```bash
