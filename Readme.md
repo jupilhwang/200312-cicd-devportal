@@ -81,7 +81,7 @@ admin / achc1aQVaZ
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
-##### install helm 
+##### install jenkins with helm 
 ```bash
 helm install --name jenkins --namespace jenkins bitnami/jenkins \
 --set jenkinsUser=admin \
