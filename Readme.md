@@ -1,11 +1,11 @@
 # CICD with PKS @200312
 
-### PKS w/NSX-T on vSphere
+## PKS w/NSX-T on vSphere
   - pks 
 
-### Installation
+## Installation
 
-#### Default Storage Class
+### Default Storage Class
 
 ```bash
 kubectl create -f -<<-EOF
@@ -25,7 +25,7 @@ kubectl patch storageclass thick -p '{"metadata": {"annotations":{"storageclass.
 ```
 ![](img/default-storage-class.png)
 
-#### Helm
+### Helm
 
 ##### Download CLI version 2
 아직 version3 은 호환성면에서 모든 chart를 제공하지 않기 때문에, version 2 사용
@@ -74,7 +74,7 @@ helm repo update
 ```
 
 
-#### GOGS for gitserver
+### GOGS for gitserver
 ```bash
 helm install --name gogs --namespace gitserver incubator/gogs \
 --set postgresql.persistence.enabled=false \
@@ -86,7 +86,7 @@ helm install --name gogs --namespace gitserver incubator/gogs \
 --set service.ingress.hosts={"git.apps.run.haas-205.pez.pivotal.io"}
 ```
 
-#### Jenkins 
+### Jenkins 
 
 admin / achc1aQVaZ
 
